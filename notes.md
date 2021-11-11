@@ -29,3 +29,7 @@ https://jagged-house-f90.notion.site/Configura-o-inicial-5b93030778384d238129c85
 ## Para styled funcionar
 01. yarn add @types/styled-components -D
 02. yarn add @types/styled-components-react-native -D
+
+## Navegation
+https://reactnavigation.org/docs/getting-started
+https://reactnavigation.org/docs/hello-react-navigation
