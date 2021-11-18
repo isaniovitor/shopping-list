@@ -33,3 +33,6 @@ https://jagged-house-f90.notion.site/Configura-o-inicial-5b93030778384d238129c85
 ## Navegation
 https://reactnavigation.org/docs/getting-started
 https://reactnavigation.org/docs/hello-react-navigation
+
+
+<!-- /* background: ${({ theme }) => theme.Colors.BLUE}; */ -->

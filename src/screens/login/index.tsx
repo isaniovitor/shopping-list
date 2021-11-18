@@ -5,17 +5,20 @@ import { KeyboardAvoidingView, Platform } from 'react-native';
 import { HOME_SCREEN } from '~/constants/routes';
 
 import groceries from '../../assets/groceries.png';
+import Input from '~/components/input';
 
 import * as sty from './styles';
 
 const Login: React.FC = () => {
   const [userName, setUserName] = useState('');
   const [userPassword, setUsePassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const navigation = useNavigation();
 
   function handleLogin() {
-    navigation.navigate(HOME_SCREEN, { userName });
+    navigation.navigate(HOME_SCREEN);
+    // navigation.setOptions({ title: 'Updated!' })};
   }
 
   return (
@@ -28,15 +31,22 @@ const Login: React.FC = () => {
         <sty.LoginImage source={groceries} />
 
         <sty.ContainerImput>
-          <sty.LoginInput
-            onChangeText={setUserName}
+          <Input
+            iconLeft="person"
+            iconType="ionicons"
+            placeholder="Digite seu username"
             value={userName}
-            placeholder="Digite seu email"
+            onChangeText={setUserName}
           />
-          <sty.LoginInput
-            onChangeText={setUsePassword}
+
+          <Input
+            iconLeft="lock"
+            placeholder="Digite sua senha"
             value={userPassword}
-            placeholder="Digite seu senha"
+            onChangeText={setUsePassword}
+            secureTextEntry={!showPassword}
+            actionIcon={() => setShowPassword(!showPassword)}
+            iconRight={showPassword ? 'eye-off' : 'eye'}
           />
         </sty.ContainerImput>
 

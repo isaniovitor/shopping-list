@@ -6,8 +6,8 @@ export const listCategory = [
     id: 1,
     name: 'Limpeza',
     listItems: [
-      { id: 1, name: 'Detergente', qtd: 4, add: false, preco: 3.0 },
-      { id: 2, name: 'Sabão', qtd: 3, add: false, preco: 5.0 },
+      { id: 1, name: 'Detergente', qtd: 4, add: true, preco: 3.99 },
+      { id: 2, name: 'Sabão', qtd: 3, add: true, preco: 5.0 },
       { id: 1, name: 'Detergente', qtd: 4, add: false, preco: 3.0 },
       { id: 2, name: 'Sabão', qtd: 3, add: false, preco: 5.0 },
       { id: 1, name: 'Detergente', qtd: 4, add: false, preco: 3.0 },

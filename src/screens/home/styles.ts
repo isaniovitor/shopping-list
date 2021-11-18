@@ -1,3 +1,4 @@
+import { StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
 
 // Containers
@@ -71,3 +72,14 @@ export const PriceItem = styled.Text`
   font-size: 14px;
   color: #8492a6;
 `;
+
+// FAB
+export const styles = StyleSheet.create({
+  fab: {
+    position: 'absolute',
+    backgroundColor: '#4299e1',
+    margin: 22,
+    right: 0,
+    bottom: 90,
+  },
+});

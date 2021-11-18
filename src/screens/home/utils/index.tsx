@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FlatList, Text, View } from 'react-native';
-import { Checkbox } from 'react-native-paper';
+import { Checkbox, FAB } from 'react-native-paper';
 
 import groceries from '../../../assets/groceries.png';
 import * as Sty from '../styles';
@@ -35,3 +35,5 @@ export function renderCategory({ item }: any) {
     </View>
   );
 }
+
+
