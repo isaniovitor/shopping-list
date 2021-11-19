@@ -12,6 +12,7 @@ interface IconInputProps {
 
 interface ContainerProps {
   labelSameLine?: boolean;
+  width: number;
 }
 
 interface ContainerInputProps {
@@ -58,7 +59,7 @@ export const ContainerInput = styled.View<ContainerInputProps>`
 `;
 
 export const Container = styled.View<ContainerProps>`
-  width: 90%;
+  width: ${({ width }) => width || width} + '%';
   flex-direction: ${({ labelSameLine }) => (labelSameLine ? 'row' : 'column')};
   align-items: ${({ labelSameLine }) =>
     labelSameLine ? 'center' : 'flex-start'};

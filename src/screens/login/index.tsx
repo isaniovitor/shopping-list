@@ -1,11 +1,14 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { KeyboardAvoidingView, Platform } from 'react-native';
+import { Button } from 'react-native-paper';
+
+import Input from '~/components/input';
 
 import { HOME_SCREEN } from '~/constants/routes';
 
 import groceries from '../../assets/groceries.png';
-import Input from '~/components/input';
+
 
 import * as sty from './styles';
 
@@ -37,6 +40,7 @@ const Login: React.FC = () => {
             placeholder="Digite seu username"
             value={userName}
             onChangeText={setUserName}
+            width={90}
           />
 
           <Input
@@ -47,6 +51,7 @@ const Login: React.FC = () => {
             secureTextEntry={!showPassword}
             actionIcon={() => setShowPassword(!showPassword)}
             iconRight={showPassword ? 'eye-off' : 'eye'}
+            width={90}
           />
         </sty.ContainerImput>
 

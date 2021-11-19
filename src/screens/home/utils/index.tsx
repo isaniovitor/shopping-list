@@ -10,7 +10,7 @@ function renderProduct({ item }: any) {
 
   return (
     <Sty.ItemListConteiner>
-      <Sty.ImageItem source={groceries} />
+      <Sty.ImageItem source={{ uri: item.image_url }} />
       <Sty.ResumeItemContainer>
         <Sty.NameItem>{item.name}</Sty.NameItem>
         <Sty.PriceItem>{item.preco} R$</Sty.PriceItem>
@@ -35,5 +35,3 @@ export function renderCategory({ item }: any) {
     </View>
   );
 }
-
-

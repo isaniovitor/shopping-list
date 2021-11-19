@@ -3,11 +3,14 @@ import type { TextInputProps } from 'react-native';
 import { ThemeContext } from 'styled-components';
 
 import { sfs } from '~/utils/responsibleText';
+import { Text } from '../text/styles';
 
 import * as S from './styles';
 
 interface InputProps {
   label?: string;
+  width: number;
+  title?: string;
   iconRight?: string;
   iconLeft?: string;
   iconType?: string;
@@ -18,6 +21,8 @@ interface InputProps {
 
 const Input: React.FC<TextInputProps & InputProps> = ({
   label,
+  width,
+  title,
   iconRight,
   iconLeft,
   labelSameLine,
@@ -30,6 +35,7 @@ const Input: React.FC<TextInputProps & InputProps> = ({
 
   return (
     <S.InputWrapper>
+      {title && <Text fontSize={sfs(16)}>{title}</Text>}
       <S.ContainerInputIcon>
         {iconLeft && (
           <S.IconInput
@@ -40,7 +46,7 @@ const Input: React.FC<TextInputProps & InputProps> = ({
         )}
         <S.Container labelSameLine={labelSameLine}>
           {label && <S.Label fontSize={sfs(9)}>{label}</S.Label>}
-          <S.ContainerInput error={error} labelSameLine={labelSameLine}>
+          <S.ContainerInput error={error} labelSameLine={labelSameLine} width={width} >
             <S.Input {...rest} autoCapitalize="none" iconRight={iconRight} />
             {iconRight && (
               <S.Touchable onPress={() => actionIcon && actionIcon()}>
@@ -54,4 +60,5 @@ const Input: React.FC<TextInputProps & InputProps> = ({
     </S.InputWrapper>
   );
 };
+
 export default Input;

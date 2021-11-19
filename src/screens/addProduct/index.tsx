@@ -4,6 +4,8 @@ import React, { useContext, useEffect } from 'react';
 import { Text, View } from 'react-native';
 import { ThemeContext } from 'styled-components';
 
+import Input from '~/components/input';
+
 // import { Container } from './styles';
 
 const AddProduct: React.FC = () => {
@@ -20,7 +22,15 @@ const AddProduct: React.FC = () => {
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Add Product</Text>
+      <Input
+
+        title="Nome"
+        placeholder="Digite o nome do produto"
+        width={90}
+
+        //value={userName}
+        //onChangeText={setUserName}
+      />
     </View>
   );
 };

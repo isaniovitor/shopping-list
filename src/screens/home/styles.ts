@@ -10,7 +10,9 @@ export const ImputContainer = styled.View`
   background-color: white;
 `;
 
-export const ListContainer = styled.View``;
+export const ListContainer = styled.View`
+  margin-bottom: 160px;
+`;
 
 export const ResumeContainer = styled.View`
   background-color: #4299e1;
