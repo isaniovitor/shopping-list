@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
+import Icon from '~/components/icon';
 
 // Containers
 export const Container = styled.View`
@@ -11,7 +12,7 @@ export const ImputContainer = styled.View`
 `;
 
 export const ListContainer = styled.View`
-  margin-bottom: 160px;
+  margin-bottom: 150px;
 `;
 
 export const ResumeContainer = styled.View`
@@ -19,6 +20,12 @@ export const ResumeContainer = styled.View`
   position: absolute;
   bottom: 0;
 
+  flex: 1;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  padding: 0 17px;
   width: 100%;
   height: 80px;
 `;
@@ -54,7 +61,6 @@ export const ItemListConteiner = styled.View`
 `;
 
 export const ImageItem = styled.Image`
-  background-color: yellow;
   width: 43px;
   height: 43px;
 `;
@@ -85,3 +91,26 @@ export const styles = StyleSheet.create({
     bottom: 90,
   },
 });
+
+// Resume
+export const IconList = styled(Icon).attrs(() => ({
+  name: 'clipboard-list',
+  size: 50,
+  color: 'white',
+  type: 'font-5',
+}))``;
+
+export const ResumeText = styled.Text`
+  font-size: 18px;
+  color: white;
+`;
+
+export const LeftResume = styled.View`
+  flex: 0.9;
+  margin-left: 7px;
+`;
+
+export const RightResume = styled.View`
+  flex: 0.25;
+  align-items: center;
+`;

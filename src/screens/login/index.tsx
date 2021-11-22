@@ -1,14 +1,13 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { KeyboardAvoidingView, Platform } from 'react-native';
-import { Button } from 'react-native-paper';
 
+import Button from '~/components/button';
 import Input from '~/components/input';
 
 import { HOME_SCREEN } from '~/constants/routes';
 
 import groceries from '../../assets/groceries.png';
-
 
 import * as sty from './styles';
 
@@ -54,10 +53,7 @@ const Login: React.FC = () => {
             width={90}
           />
         </sty.ContainerImput>
-
-        <sty.LoginButton onPress={handleLogin} accessibilityLabel="fazer login">
-          <sty.TextButton>Entrar</sty.TextButton>
-        </sty.LoginButton>
+        <Button color="#4299e1" label="Entrar" actionBtn={handleLogin} />
       </sty.Container>
     </KeyboardAvoidingView>
   );

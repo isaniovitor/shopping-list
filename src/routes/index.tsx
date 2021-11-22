@@ -4,10 +4,12 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components/native';
 
 import {
+  ADDCATEGORY_SCREEN,
   ADDPRODUCT_SCREEN,
   HOME_SCREEN,
   LOGIN_SCREEN,
 } from '~/constants/routes';
+import AddCategory from '~/screens/addCategory';
 // import AddCategory from '~/screens/addCategory';
 import AddProduct from '~/screens/addProduct';
 import Home from '~/screens/home';
@@ -41,6 +43,13 @@ function RootStack() {
           <Stack.Screen
             name={ADDPRODUCT_SCREEN}
             component={AddProduct}
+            options={{
+              header: props => <Header enableNavigation {...props} />,
+            }}
+          />
+          <Stack.Screen
+            name={ADDCATEGORY_SCREEN}
+            component={AddCategory}
             options={{
               header: props => <Header enableNavigation {...props} />,
             }}

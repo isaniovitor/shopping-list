@@ -1,10 +1,10 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useContext, useEffect } from 'react';
-import { FlatList, KeyboardAvoidingView, Platform, Text } from 'react-native';
+import { FlatList, KeyboardAvoidingView, Platform } from 'react-native';
 import { FAB } from 'react-native-paper';
 import { ThemeContext } from 'styled-components';
 
-import { ADDCATEGORY_SCREEN, ADDPRODUCT_SCREEN } from '~/constants/routes';
+import { ADDPRODUCT_SCREEN } from '~/constants/routes';
 
 import { listCategory } from './mock';
 import { renderCategory } from './utils';
@@ -61,9 +61,22 @@ const Home: React.FC = () => {
             keyExtractor={(item: any, index: any) => index}
           />
         </Sty.ListContainer>
-        <FAB style={styles.fab} icon="plus" onPress={handleAddProduct} />
+        <FAB
+          style={styles.fab}
+          color="white"
+          icon="plus"
+          onPress={handleAddProduct}
+        />
         <Sty.ResumeContainer>
-          <Text>Resumo</Text>
+          <Sty.IconList />
+          <Sty.LeftResume>
+            <Sty.ResumeText>Total de item</Sty.ResumeText>
+            <Sty.ResumeText>valor total</Sty.ResumeText>
+          </Sty.LeftResume>
+          <Sty.RightResume>
+            <Sty.ResumeText>10</Sty.ResumeText>
+            <Sty.ResumeText>R$ 350</Sty.ResumeText>
+          </Sty.RightResume>
         </Sty.ResumeContainer>
       </Sty.Container>
     </KeyboardAvoidingView>

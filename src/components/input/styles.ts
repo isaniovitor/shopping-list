@@ -4,6 +4,11 @@ import styled from 'styled-components/native';
 import Icon from '~/components/icon';
 import Text from '~/components/text';
 
+interface InputWrapperProps {
+  // type: string;
+  width: number;
+}
+
 interface IconInputProps {
   name: string;
   iconType?: string;
@@ -12,7 +17,7 @@ interface IconInputProps {
 
 interface ContainerProps {
   labelSameLine?: boolean;
-  width: number;
+  //width: number;
 }
 
 interface ContainerInputProps {
@@ -21,11 +26,13 @@ interface ContainerInputProps {
 }
 
 interface TextInputProps {
+  //margin: boolean;
   iconRight?: string;
 }
 
-export const InputWrapper = styled.View`
+export const InputWrapper = styled.View<InputWrapperProps>`
   background-color: ${({ theme }) => theme.Colors.WHITE};
+  width: ${({ width }) => width}%;
   border-radius: 15px;
   margin-bottom: 10px;
 `;
@@ -47,19 +54,19 @@ export const Label = styled(Text).attrs(({ theme }) => ({
 export const ContainerInput = styled.View<ContainerInputProps>`
   flex-direction: row;
   border-color: ${({ theme, error }) =>
-    error ? theme.Colors.ERROR : theme.Colors.MEDIUM_GRAY};
+    error ? theme.Colors.ERROR : theme.Colors.BLUE};
   background-color: ${({ theme }) => theme.Colors.WHITE};
   margin-top: ${({ labelSameLine }) => (labelSameLine ? 0 : 10)}px;
   margin-left: ${({ labelSameLine }) => (labelSameLine ? 15 : 0)}px;
   width: ${({ labelSameLine }) => (labelSameLine ? '65%' : '100%')};
   /* border-radius: 15px; */
-  border-bottom-width: 1px;
+  border-bottom-width: 2px;
   justify-content: space-between;
   align-items: center;
 `;
 
 export const Container = styled.View<ContainerProps>`
-  width: ${({ width }) => width || width} + '%';
+  width: 98%;
   flex-direction: ${({ labelSameLine }) => (labelSameLine ? 'row' : 'column')};
   align-items: ${({ labelSameLine }) =>
     labelSameLine ? 'center' : 'flex-start'};
@@ -72,7 +79,7 @@ export const Input = styled.TextInput.attrs<TextInputProps>(({ theme }) => ({
   width: ${({ iconRight }) => (iconRight ? 90 : 100)}%;
   font-size: ${({ theme }) => theme.Sizes.FONTSIZE_INPUT}px;
   margin-bottom: ${vs(10)}px;
-  margin-left: 10px;
+  margin-left: 0px;
   color: ${({ theme }) => theme.Colors.TEXT_NO_CLICKABLE};
 `;
 
