@@ -2,8 +2,10 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useContext, useEffect, useState } from 'react';
 import { FlatList, KeyboardAvoidingView, Platform } from 'react-native';
 import { FAB } from 'react-native-paper';
+import { useSelector } from 'react-redux';
 import { ThemeContext } from 'styled-components';
 
+import type { AplicationState } from '~/@types/entities/AplicationState';
 import { ADDPRODUCT_SCREEN, SHOP_SCREEN } from '~/constants/routes';
 
 import { listCategory } from './mock';
@@ -16,6 +18,7 @@ const Home: React.FC = () => {
   const navigation = useNavigation();
   const { Colors } = useContext(ThemeContext);
   const [search, setSearch] = useState('');
+  const { username } = useSelector((state: AplicationState) => state.user);
   const listItems: void[] = [];
 
   function handleAddProduct() {
@@ -44,9 +47,9 @@ const Home: React.FC = () => {
       iconType: 'ionicons',
       actionButtonRight: handleGoToCart,
       iconColor: Colors.WHITE,
-      title: 'Bem vindo Ruan',
+      title: `Bem vindo ${username}`,
     });
-  }, [navigation, handleGoToCart, Colors]);
+  }, [navigation, handleGoToCart, Colors, username]);
 
   return (
     <KeyboardAvoidingView

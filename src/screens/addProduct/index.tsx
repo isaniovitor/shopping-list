@@ -59,6 +59,7 @@ const AddProduct: React.FC = () => {
             title="Nome"
             placeholder="Digite o nome do produto"
             width={90}
+            type="input"
             // value={userName}
             // onChangeText={setUserName}
           />
@@ -67,6 +68,7 @@ const AddProduct: React.FC = () => {
               title="Quantidade"
               placeholder="Digite a quantidade"
               width={44}
+              type="input"
 
               // labelSameLine
               // value={userName}
@@ -89,6 +91,7 @@ const AddProduct: React.FC = () => {
             title="Preço"
             placeholder="Digite o preço"
             width={90}
+            type="input"
 
             // value={userName}
             // onChangeText={setUserName}

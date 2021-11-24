@@ -17,6 +17,7 @@ interface IconInputProps {
 
 interface ContainerProps {
   labelSameLine?: boolean;
+  type: string;
   //width: number;
 }
 
@@ -51,7 +52,7 @@ export const Label = styled(Text).attrs(({ theme }) => ({
   color: ${({ theme }) => theme.Colors.FONT_INPUT};
 `;
 
-export const ContainerInput = styled.View<ContainerInputProps>`
+export const ContainerInput = styled.View<ContainerInputProps & ContainerProps>`
   flex-direction: row;
   border-color: ${({ theme, error }) =>
     error ? theme.Colors.ERROR : theme.Colors.FONT_INPUT};
@@ -60,13 +61,13 @@ export const ContainerInput = styled.View<ContainerInputProps>`
   margin-left: ${({ labelSameLine }) => (labelSameLine ? 15 : 0)}px;
   width: ${({ labelSameLine }) => (labelSameLine ? '65%' : '100%')};
   /* border-radius: 15px; */
-  border-bottom-width: 2px;
+  border-bottom-width: ${({ type }) => (type === 'inputlogin' ? 0 : 2)}px;
   justify-content: space-between;
   align-items: center;
 `;
 
 export const Container = styled.View<ContainerProps>`
-  width: 98%;
+  width: ${({ type }) => (type === 'dropdwon' || type === 'input' ? 98 : 90)}%;
   flex-direction: ${({ labelSameLine }) => (labelSameLine ? 'row' : 'column')};
   align-items: ${({ labelSameLine }) =>
     labelSameLine ? 'center' : 'flex-start'};

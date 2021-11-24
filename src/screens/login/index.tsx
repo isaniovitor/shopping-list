@@ -1,11 +1,12 @@
-import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { KeyboardAvoidingView, Platform } from 'react-native';
+import { useDispatch } from 'react-redux';
 
 import Button from '~/components/button';
 import Input from '~/components/input';
 
 import { HOME_SCREEN } from '~/constants/routes';
+import { loginAction } from '~/store/ducks/user/actions';
 
 import groceries from '../../assets/groceries.png';
 
@@ -16,11 +17,11 @@ const Login: React.FC = () => {
   const [userPassword, setUsePassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
-  const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   function handleLogin() {
-    navigation.navigate(HOME_SCREEN);
-    // navigation.setOptions({ title: 'Updated!' })};
+    dispatch(loginAction(userName, userPassword));
+    // tirou navegati
   }
 
   return (
@@ -40,6 +41,7 @@ const Login: React.FC = () => {
             value={userName}
             onChangeText={setUserName}
             width={90}
+            type="inputlogin"
           />
 
           <Input
@@ -51,6 +53,7 @@ const Login: React.FC = () => {
             actionIcon={() => setShowPassword(!showPassword)}
             iconRight={showPassword ? 'eye-off' : 'eye'}
             width={90}
+            type="inputlogin"
           />
         </sty.ContainerImput>
         <Button color="#4299e1" label="Entrar" actionBtn={handleLogin} />

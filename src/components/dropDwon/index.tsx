@@ -1,5 +1,9 @@
+import { Picker } from '@react-native-picker/picker';
 import React, { useState } from 'react';
-import { View, Picker, StyleSheet } from 'react-native';
+import { View } from 'react-native';
+
+import { mockCategory } from './mock';
+
 import { styles } from './styles';
 
 interface DropProps {
@@ -16,9 +20,15 @@ const DropDwon: React.FC<DropProps> = ({ label, dropWidth }) => {
         style={{ height: 46, width: dropWidth }}
         onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
       >
-        <Picker.Item label="Carnes" value="carnes" />
-        <Picker.Item label="Limpeza" value="limpeza" />
-        <Picker.Item label="Frutas" value="frutas" />
+        {mockCategory.map(category => {
+          return (
+            <Picker.Item
+              label={category.name}
+              value={category.name}
+              key={category.id}
+            />
+          );
+        })}
       </Picker>
     </View>
   );
