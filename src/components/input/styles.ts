@@ -54,7 +54,7 @@ export const Label = styled(Text).attrs(({ theme }) => ({
 export const ContainerInput = styled.View<ContainerInputProps>`
   flex-direction: row;
   border-color: ${({ theme, error }) =>
-    error ? theme.Colors.ERROR : theme.Colors.BLUE};
+    error ? theme.Colors.ERROR : theme.Colors.FONT_INPUT};
   background-color: ${({ theme }) => theme.Colors.WHITE};
   margin-top: ${({ labelSameLine }) => (labelSameLine ? 0 : 10)}px;
   margin-left: ${({ labelSameLine }) => (labelSameLine ? 15 : 0)}px;

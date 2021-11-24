@@ -8,12 +8,14 @@ import {
   ADDPRODUCT_SCREEN,
   HOME_SCREEN,
   LOGIN_SCREEN,
+  SHOP_SCREEN,
 } from '~/constants/routes';
 import AddCategory from '~/screens/addCategory';
 // import AddCategory from '~/screens/addCategory';
 import AddProduct from '~/screens/addProduct';
 import Home from '~/screens/home';
 import Login from '~/screens/login';
+import Shop from '~/screens/shop';
 import Theme from '~/themes';
 
 import { Header } from '../components/header';
@@ -54,13 +56,13 @@ function RootStack() {
               header: props => <Header enableNavigation {...props} />,
             }}
           />
-          {/* <Stack.Screen
-            name={ADDCATEGORY}
-            component={AddCategory}
+          <Stack.Screen
+            name={SHOP_SCREEN}
+            component={Shop}
             options={{
               header: props => <Header enableNavigation {...props} />,
             }}
-          /> */}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </ThemeProvider>

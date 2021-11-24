@@ -1,17 +1,19 @@
 import React, { useContext } from 'react';
 import type { TextInputProps } from 'react-native';
-import { white } from 'react-native-paper/lib/typescript/styles/colors';
 import { ThemeContext } from 'styled-components';
 
 import { sfs } from '~/utils/responsibleText';
+
+import DropDwon from '../dropDwon';
 import { Text } from '../text/styles';
 
 import * as S from './styles';
 
 interface InputProps {
   label?: string;
-  margin?: boolean;
+  type?: string;
   width: number;
+  dropwidth?: number;
   title?: string;
   iconRight?: string;
   iconLeft?: string;
@@ -24,7 +26,8 @@ interface InputProps {
 const Input: React.FC<TextInputProps & InputProps> = ({
   label,
   width,
-  margin,
+  dropwidth,
+  type,
   title,
   iconRight,
   iconLeft,
@@ -47,17 +50,20 @@ const Input: React.FC<TextInputProps & InputProps> = ({
             name={iconLeft}
           />
         )}
-        <S.Container labelSameLine={labelSameLine}>
-          {label && <S.Label fontSize={sfs(9)}>{label}</S.Label>}
-          <S.ContainerInput error={error} labelSameLine={labelSameLine}>
-            <S.Input {...rest} autoCapitalize="none" iconRight={iconRight} />
-            {iconRight && (
-              <S.Touchable onPress={() => actionIcon && actionIcon()}>
-                <S.IconInput name={iconRight} />
-              </S.Touchable>
-            )}
-          </S.ContainerInput>
-        </S.Container>
+        {type && <DropDwon label={title} dropWidth={dropwidth} />}
+        {!type && (
+          <S.Container labelSameLine={labelSameLine}>
+            {label && <S.Label fontSize={sfs(9)}>{label}</S.Label>}
+            <S.ContainerInput error={error} labelSameLine={labelSameLine}>
+              <S.Input {...rest} autoCapitalize="none" iconRight={iconRight} />
+              {iconRight && (
+                <S.Touchable onPress={() => actionIcon && actionIcon()}>
+                  <S.IconInput name={iconRight} />
+                </S.Touchable>
+              )}
+            </S.ContainerInput>
+          </S.Container>
+        )}
       </S.ContainerInputIcon>
       {error && <S.ErrorMessage fontSize={sfs(12)}>{error}</S.ErrorMessage>}
     </S.InputWrapper>

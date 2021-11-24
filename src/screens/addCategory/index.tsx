@@ -1,10 +1,10 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useNavigation } from '@react-navigation/core';
 import React, { useContext, useEffect } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { ThemeContext } from 'styled-components';
-import Button from '~/components/button';
 
+import Button from '~/components/button';
 import Input from '~/components/input';
 
 import * as Sty from './styles';

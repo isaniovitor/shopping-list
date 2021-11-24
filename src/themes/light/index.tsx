@@ -16,11 +16,11 @@ export default {
 
   Sizes: {
     FONTSIZE_BUTTON: 20,
-    FONTSIZE_INPUT: sfs(16),
+    FONTSIZE_INPUT: sfs(14),
     FONTSIZE_LABEL: sfs(12),
     FONTSIZE_INPUT_LABEL: sfs(13),
     ICON_SIZE: ms(22),
-    ICON_SIZE_BACK: ms(14),
+    ICON_SIZE_BACK: ms(20),
     ICON_SIZE_HEADER: ms(40),
   },
 };

@@ -20,7 +20,7 @@ export function Header({
       <Sty.StatusBar />
       {enableNavigation && (
         <Sty.ButtonLeft onPress={() => navigation.goBack()}>
-          <Sty.IconBack />
+          <Sty.IconBack color="white" />
         </Sty.ButtonLeft>
       )}
       <Sty.ContainerTitle

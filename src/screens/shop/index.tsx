@@ -1,52 +1,28 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { FlatList, KeyboardAvoidingView, Platform } from 'react-native';
 import { FAB } from 'react-native-paper';
 import { ThemeContext } from 'styled-components';
 
-import { ADDPRODUCT_SCREEN, SHOP_SCREEN } from '~/constants/routes';
+import { ADDPRODUCT_SCREEN } from '~/constants/routes';
 
-import { listCategory } from './mock';
 import { renderCategory } from './utils';
 
 import * as Sty from './styles';
 import { styles } from './styles';
+import { listCategory } from '../home/mock';
 
-const Home: React.FC = () => {
+const Shop: React.FC = () => {
   const navigation = useNavigation();
   const { Colors } = useContext(ThemeContext);
-  const [search, setSearch] = useState('');
-  const listItems: void[] = [];
-
-  function handleAddProduct() {
-    navigation.navigate(ADDPRODUCT_SCREEN);
-  }
-
-  function handleGoToCart() {
-    navigation.navigate(SHOP_SCREEN);
-  }
-
-  // function list(text: string) {gg
-
-  //   listCategory.forEach(item => {
-  //     if (item.name.includes(text)) {
-  //       listItems.push(item);
-  //     }
-  //   });
-  // }
-  // const handleGoToCart = () => {
-  //   navigation.navigate(ADDCATEGORY_SCREEN);
-  // };
 
   useEffect(() => {
     navigation.setOptions({
-      iconRight: 'md-cart',
       iconType: 'ionicons',
-      actionButtonRight: handleGoToCart,
       iconColor: Colors.WHITE,
-      title: 'Bem vindo Ruan',
+      title: 'Carrinho',
     });
-  }, [navigation, handleGoToCart, Colors]);
+  }, [navigation, Colors]);
 
   return (
     <KeyboardAvoidingView
@@ -57,9 +33,8 @@ const Home: React.FC = () => {
       <Sty.Container>
         <Sty.ImputContainer>
           <Sty.SearchImput
-            value={search}
-            onChangeText={setSearch}
-            // onChange={list}
+            // onChangeText={setUserEmail}
+            // value={userEmail}
             placeholder="Buscar Produtos"
           />
         </Sty.ImputContainer>
@@ -72,12 +47,6 @@ const Home: React.FC = () => {
             keyExtractor={(item: any, index: any) => index}
           />
         </Sty.ListContainer>
-        <FAB
-          style={styles.fab}
-          color="white"
-          icon="plus"
-          onPress={handleAddProduct}
-        />
         <Sty.ResumeContainer>
           <Sty.IconList />
           <Sty.LeftResume>
@@ -94,4 +63,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default Shop;

@@ -38,8 +38,8 @@ export const Title = styled(NewText).attrs({
 `;
 
 export const ButtonLeft = styled.TouchableOpacity`
-  flex: 0.2;
-  margin-left: -10px;
+  padding-left: 5px;
+  flex: 0.12;
   color: ${({ theme }) => theme.Colors.WHITE};
 `;
 
@@ -51,10 +51,12 @@ export const IconColor = styled(Icon).attrs(({ theme }) => ({
 `;
 
 export const IconBack = styled(Icon).attrs(({ theme }) => ({
-  name: 'chevron-left',
+  type: 'ionicons',
+  name: 'arrow-back',
+  IconColor: 'white',
   size: theme.Sizes.ICON_SIZE_BACK,
 }))`
-  color: ${({ theme }) => theme.Colors.TEXT_CLICKABLE};
+  color: ${({ theme }) => theme.Colors.WHITE};
 `;
 
 export const ButtonRight = styled.TouchableOpacity`

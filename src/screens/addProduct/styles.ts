@@ -4,13 +4,14 @@ import styled from 'styled-components';
 // conteinrs
 export const Container = styled.View`
   flex: 1;
-  align-items:center;
+  align-items: center;
   justify-content: center;
 
   background-color: white;
 `;
 
 export const ImageContainer = styled.View`
+  justify-content: center;
   flex: 0.25;
 `;
 
@@ -44,5 +45,13 @@ export const styles = StyleSheet.create({
   fab: {
     backgroundColor: '#4299e1',
     marginLeft: 80,
+  },
+  imagefab: {
+    backgroundColor: '#4299e1',
+    width: 100,
+    height: 100,
+    borderRadius: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useNavigation } from '@react-navigation/core';
 import React, { useContext, useEffect } from 'react';
-import { KeyboardAvoidingView, Platform, Text } from 'react-native';
+import { KeyboardAvoidingView, Platform } from 'react-native';
 import { FAB } from 'react-native-paper';
 import { ThemeContext } from 'styled-components';
 
@@ -27,6 +27,10 @@ const AddProduct: React.FC = () => {
     console.log('adicionou pedido!'); // navigation.setOptions({ title: 'Updated!' })};
   }
 
+  function handleAddImage() {
+    console.log('adicionou imagem!'); // navigation.setOptions({ title: 'Updated!' })};
+  }
+
   useEffect(() => {
     navigation.setOptions({
       iconType: 'ionicons',
@@ -43,7 +47,12 @@ const AddProduct: React.FC = () => {
     >
       <Sty.Container>
         <Sty.ImageContainer>
-          <Text>Image</Text>
+          <FAB
+            style={Sty.styles.imagefab}
+            color="white"
+            icon="image"
+            onPress={handleAddImage}
+          />
         </Sty.ImageContainer>
         <Sty.InputContainer>
           <Input
@@ -67,6 +76,8 @@ const AddProduct: React.FC = () => {
               title="Unidade"
               placeholder="Digite a unidade"
               width={44}
+              dropwidth={185}
+              type="dropdwon"
 
               // labelSameLine
               // value={userName}
@@ -87,6 +98,8 @@ const AddProduct: React.FC = () => {
               title="Categoria"
               placeholder="Selecione a categoria"
               width={55}
+              dropwidth={232}
+              type="dropdwon"
 
               // value={userName}
               // onChangeText={setUserName}<Button label="oi" actionBtn={handleAddCategory} />

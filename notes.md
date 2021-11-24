@@ -38,3 +38,5 @@ https://reactnavigation.org/docs/hello-react-navigation
 <!-- /* background: ${({ theme }) => theme.Colors.BLUE}; */ -->
 width: ${({ width }) => width || width} + '%';
 width={width}
+
+https://reactnative.dev/docs/picker#example

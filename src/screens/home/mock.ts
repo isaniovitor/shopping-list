@@ -34,7 +34,7 @@ export const listCategory = [
         id: 1,
         name: 'Picanha',
         qtd: 3,
-        add: false,
+        add: true,
         preco: 30.0,
         image_url:
           'https://images.tcdn.com.br/img/img_prod/765092/picanha_a_nacional_preco_por_unidade_com_1_200_kg_294_1_20200326164458.jpg',
@@ -58,7 +58,7 @@ export const listCategory = [
         id: 1,
         name: 'Mamão',
         qtd: 3,
-        add: false,
+        add: true,
         preco: 7.0,
         image_url:
           'https://cd.shoppub.com.br/cenourao/media/cache/c5/c9/c5c9a07e53bb4570784f12553e31ded9.jpg',
