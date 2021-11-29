@@ -1,45 +1,40 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useContext, useEffect, useState } from 'react';
-import { FlatList, KeyboardAvoidingView, Platform } from 'react-native';
-import { FAB } from 'react-native-paper';
-import { useSelector } from 'react-redux';
+import { KeyboardAvoidingView, Platform, FlatList, View } from 'react-native';
+import { FAB, Checkbox } from 'react-native-paper';
+import { useDispatch, useSelector } from 'react-redux';
 import { ThemeContext } from 'styled-components';
 
 import type { AplicationState } from '~/@types/entities/AplicationState';
+import type { GroceryProps } from '~/@types/entities/Grocery';
+import type { ProductProps } from '~/@types/entities/Product';
 import { ADDPRODUCT_SCREEN, SHOP_SCREEN } from '~/constants/routes';
-
-import { listCategory } from './mock';
-import { renderCategory } from './utils';
+import { addProductAction } from '~/store/ducks/product/actions';
 
 import * as Sty from './styles';
 import { styles } from './styles';
 
 const Home: React.FC = () => {
+  const dispatch = useDispatch();
   const navigation = useNavigation();
   const { Colors } = useContext(ThemeContext);
   const [search, setSearch] = useState('');
   const { username } = useSelector((state: AplicationState) => state.user);
-  const listItems: void[] = [];
+  const { groceryList } = useSelector(
+    (state: AplicationState) => state.product,
+  );
+  const { categoryList } = useSelector(
+    (state: AplicationState) => state.category,
+  );
 
   function handleAddProduct() {
+    console.log(categoryList);
     navigation.navigate(ADDPRODUCT_SCREEN);
   }
 
   function handleGoToCart() {
     navigation.navigate(SHOP_SCREEN);
   }
-
-  // function list(text: string) {gg
-
-  //   listCategory.forEach(item => {
-  //     if (item.name.includes(text)) {
-  //       listItems.push(item);
-  //     }
-  //   });
-  // }
-  // const handleGoToCart = () => {
-  //   navigation.navigate(ADDCATEGORY_SCREEN);
-  // };
 
   useEffect(() => {
     navigation.setOptions({
@@ -50,6 +45,54 @@ const Home: React.FC = () => {
       title: `Bem vindo ${username}`,
     });
   }, [navigation, handleGoToCart, Colors, username]);
+
+  function pressCheck(item) {
+    const newList = groceryList;
+    // console.log(newList.entries();
+    newList.map(categoty => {
+      if (categoty.name === item.category) {
+        // categoty.listItems.find(product => product === item);
+        categoty.listItems.map(product => {
+          if (product === item) product.isAdded = !product.isAdded;
+          return null;
+        });
+      }
+      return null;
+    });
+
+    dispatch(addProductAction(newList));
+  }
+
+  function renderProduct({ item }: any) {
+    return (
+      <Sty.ItemListConteiner>
+        <Sty.ImageItem source={{ uri: item.image_url }} />
+        <Sty.ResumeItemContainer>
+          <Sty.NameItem>{item.name}</Sty.NameItem>
+          <Sty.PriceItem>{item.price} R$</Sty.PriceItem>
+        </Sty.ResumeItemContainer>
+        <Checkbox
+          status={item.isAdded ? 'checked' : 'unchecked'}
+          onPress={() => pressCheck(item)}
+        />
+      </Sty.ItemListConteiner>
+    );
+  }
+
+  function renderCategory({ item }: any) {
+    return (
+      <View>
+        <Sty.HeaderList>{item.name}</Sty.HeaderList>
+        <FlatList
+          style={{ paddingTop: 20 }}
+          data={item.listItems}
+          extraData={item.listItems}
+          renderItem={renderProduct}
+          keyExtractor={(itemCategory: any, index: any) => index}
+        />
+      </View>
+    );
+  }
 
   return (
     <KeyboardAvoidingView
@@ -69,8 +112,8 @@ const Home: React.FC = () => {
         <Sty.ListContainer>
           <FlatList
             // style={{ backgroundColor: 'black' }}
-            data={listCategory}
-            extraData={listCategory}
+            data={groceryList}
+            extraData={groceryList}
             renderItem={renderCategory}
             keyExtractor={(item: any, index: any) => index}
           />

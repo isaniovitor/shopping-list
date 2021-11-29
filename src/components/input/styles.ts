@@ -18,7 +18,7 @@ interface IconInputProps {
 interface ContainerProps {
   labelSameLine?: boolean;
   type: string;
-  //width: number;
+  // width: number;
 }
 
 interface ContainerInputProps {
@@ -27,7 +27,7 @@ interface ContainerInputProps {
 }
 
 interface TextInputProps {
-  //margin: boolean;
+  // margin: boolean;
   iconRight?: string;
 }
 
