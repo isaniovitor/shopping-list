@@ -10,10 +10,10 @@ import Input from '~/components/input';
 
 import type { AplicationState } from '~/@types/entities/AplicationState';
 import type { CategoryProps } from '~/@types/entities/Category';
-import {
-  addCategoryAction,
-  addProductAction,
-} from '~/store/ducks/category/actions';
+import type { GroceryProps } from '~/@types/entities/Grocery';
+import { ADDPRODUCT_SCREEN } from '~/constants/routes';
+import { addCategoryAction } from '~/store/ducks/category/actions';
+import { addProductAction } from '~/store/ducks/product/actions';
 
 import * as Sty from './styles';
 
@@ -25,16 +25,32 @@ const AddCategory: React.FC = () => {
   const { categoryList } = useSelector(
     (state: AplicationState) => state.category,
   );
+  const { groceryList } = useSelector(
+    (state: AplicationState) => state.product,
+  );
 
   function handleAddCategory() {
-    const newList = categoryList;
+    const newCategoryList = categoryList;
+    const newGroceryList = groceryList;
     const newCategory: CategoryProps = {
-      id: 5,
+      id: 6,
       name: userName,
     };
+    const newGroceryCategory: GroceryProps = {
+      id: 6,
+      name: userName,
+      listItems: [],
+    };
 
-    newList.push(newCategory);
-    dispatch(addCategoryAction(newList));
+    // add na lista de categorias
+    newCategoryList.push(newCategory);
+    dispatch(addCategoryAction(newCategoryList));
+
+    // add na lista grocery
+    newGroceryList.push(newGroceryCategory);
+    dispatch(addProductAction(newGroceryList));
+
+    navigation.navigate(ADDPRODUCT_SCREEN);
   }
 
   useEffect(() => {

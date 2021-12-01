@@ -1,10 +1,10 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { useNavigation } from '@react-navigation/core';
+import { useNavigation, useRoute } from '@react-navigation/core';
 import React, { useContext, useEffect, useState } from 'react';
 import { KeyboardAvoidingView, Platform } from 'react-native';
 import { FAB } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThemeContext } from 'styled-components';
+import { v4 as uuidv4 } from 'uuid';
 
 import Button from '~/components/button';
 import Picker from '~/components/dropDwon';
@@ -12,14 +12,14 @@ import Input from '~/components/input';
 
 import type { AplicationState } from '~/@types/entities/AplicationState';
 import type { ProductProps } from '~/@types/entities/Product';
-import { ADDCATEGORY_SCREEN } from '~/constants/routes';
+import { ADDCATEGORY_SCREEN, HOME_SCREEN } from '~/constants/routes';
 import { addProductAction } from '~/store/ducks/product/actions';
 
 import * as Sty from './styles';
 
-// import { Container } from './styles';
-
 const AddProduct: React.FC = () => {
+  const route = useRoute();
+  const { item } = route.params;
   const [userPhoto, setUserPhoto] = useState(
     'https://a-static.mlcdn.com.br/618x463/detergente-liquido-ype-neutro-500ml/costaatacado/90146/bc45e8e91700e557fe42944c14353cac.jpg',
   );
@@ -27,7 +27,7 @@ const AddProduct: React.FC = () => {
   const [userQuantity, setUserQuantity] = useState('');
   const [userUnity, setUserUnity] = useState('');
   const [userPrice, setUserPrice] = useState('');
-  const [userCategory, setUserCategory] = useState('');
+  const [userCategory, setUserCategory] = useState({ id: 0, name: '' });
   const { groceryList } = useSelector(
     (state: AplicationState) => state.product,
   );
@@ -48,9 +48,10 @@ const AddProduct: React.FC = () => {
     let newItem: ProductProps;
 
     newList.map(item => {
-      if (item.name === userCategory) {
+      // mudei aq
+      if (item.id === userCategory.id) {
         newItem = {
-          id: '1',
+          id: '8',
           name: userName,
           amount: userQuantity,
           price: userPrice,
@@ -60,6 +61,37 @@ const AddProduct: React.FC = () => {
           category: userCategory,
         };
         item.listItems.push(newItem);
+      }
+      return navigation.navigate(HOME_SCREEN);
+    });
+
+    dispatch(addProductAction(newList));
+  }
+
+  function handleEditProduct() {
+    const newList = groceryList;
+    const EditedItem: ProductProps = {
+      id: item.id,
+      name: userName,
+      amount: userQuantity,
+      price: userPrice,
+      unidade: userUnity,
+      image_url: userPhoto,
+      isAdded: item.isAdded,
+      category: userCategory,
+    };
+
+    newList.map(category => {
+      // mudei aq
+      if (category.id === userCategory.id) {
+        category.listItems.map(product => {
+          // uso o nome aq pois o id usando uuid n dá
+          if (product.name === item.name)
+            category.listItems[category.listItems.indexOf(product)] =
+              EditedItem;
+
+          return navigation.navigate(HOME_SCREEN);
+        });
       }
       return null;
     });
@@ -76,9 +108,16 @@ const AddProduct: React.FC = () => {
     navigation.setOptions({
       iconType: 'ionicons',
       iconColor: Colors.WHITE,
-      title: 'Cadastrar Produtos',
+      title: item ? 'Editar Produto' : 'Adicionar Produto',
     });
-  }, [navigation, Colors]);
+    if (item) {
+      setUserName(item.name);
+      setUserQuantity(item.amount);
+      setUserUnity(item.unidade);
+      setUserCategory(item.category);
+      setUserPrice(item.price);
+    }
+  }, [navigation, Colors, item]);
 
   return (
     <KeyboardAvoidingView
@@ -103,8 +142,6 @@ const AddProduct: React.FC = () => {
             type="input"
             value={userName}
             onChangeText={setUserName}
-            // value={userName}
-            // onChangeText={setUserName}
           />
           <Sty.RowInputContainer>
             <Input
@@ -114,10 +151,6 @@ const AddProduct: React.FC = () => {
               type="input"
               value={userQuantity}
               onChangeText={setUserQuantity}
-
-              // labelSameLine
-              // value={userName}
-              // onChangeText={setUserName}
             />
             <Input
               title="Unidade"
@@ -128,11 +161,13 @@ const AddProduct: React.FC = () => {
               type="input"
               value={userUnity}
               onChangeText={setUserUnity}
-
-              // labelSameLine
-              // value={userName}
-              // onChangeText={setUserName}
             />
+            {/* <Picker
+              itemSelect={userCategory}
+              setItem={setUserCategory}
+              categories={categoryList}
+              disabled={false}
+            /> */}
           </Sty.RowInputContainer>
 
           <Input
@@ -142,15 +177,12 @@ const AddProduct: React.FC = () => {
             type="input"
             value={userPrice}
             onChangeText={setUserPrice}
-
-            // value={userName}
-            // onChangeText={setUserName}
           />
           <Sty.AddCategoryContainer>
             <Picker
               itemSelect={userCategory}
               setItem={setUserCategory}
-              categories={groceryList}
+              categories={categoryList}
               disabled={false}
             />
             <FAB
@@ -162,7 +194,11 @@ const AddProduct: React.FC = () => {
           </Sty.AddCategoryContainer>
         </Sty.InputContainer>
         <Sty.ButtonContainer>
-          <Button color="white" label="Salvar" actionBtn={handleAddProduct} />
+          <Button
+            color="white"
+            label="Salvar"
+            actionBtn={() => (item ? handleEditProduct() : handleAddProduct())} // aq(item ? handleAddProduct : handleEditProduct)
+          />
         </Sty.ButtonContainer>
       </Sty.Container>
     </KeyboardAvoidingView>

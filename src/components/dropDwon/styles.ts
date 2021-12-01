@@ -17,28 +17,31 @@ export const Label = styled.Text`
 `;
 
 export const PlaceholderText = styled.Text`
+  padding: 10px 0;
   font-size: ${({ theme }) => theme.Sizes.FONTSIZE_INPUT}px;
   color: ${({ theme }) => theme.Colors.TEXT_CLICKABLE};
 `;
 
 export const Touchable = styled.TouchableOpacity`
   width: 100%;
+  /* background-color: black; */
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 `;
 
 export const ContainerPicker = styled.View`
-  padding: 20px 0px;
+  /* padding: 20px 0px; */
   width: 100%;
-  margin-top: 15px;
-  background-color: #eeee;
+  /* background-color: #eeee; */
 `;
 
 export const TitleItem = styled.Text`
-  font-size: 20px;
-  margin-bottom: 20px;
-  color: black;
+  font-size: 14px;
+  /* padding: 10px; */
+  margin-bottom: 10px;
+  background-color: white;
+  /* color: black; */
 `;
 
 export const ContainerList = styled.View`

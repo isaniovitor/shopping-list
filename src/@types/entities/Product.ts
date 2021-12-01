@@ -1,4 +1,4 @@
-// import type { CategoryProps } from './Category';
+import type { CategoryProps } from './Category';
 
 export interface ProductProps {
   id: string;
@@ -8,5 +8,5 @@ export interface ProductProps {
   unidade?: string;
   image_url?: string;
   isAdded: boolean;
-  category: string;
+  category: CategoryProps;
 }

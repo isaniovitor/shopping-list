@@ -29,9 +29,8 @@ const Shop: React.FC = () => {
 
   function pressCheck(item) {
     const newList = groceryList;
-    // console.log(newList.entries();
     newList.map(categoty => {
-      if (categoty.name === item.category) {
+      if (categoty.name === item.category.name) {
         categoty.listItems.map(product => {
           if (product === item) product.isAdded = !product.isAdded;
           return null;
@@ -95,7 +94,6 @@ const Shop: React.FC = () => {
         </Sty.ImputContainer>
         <Sty.ListContainer>
           <FlatList
-            // style={{ backgroundColor: 'black' }}
             data={groceryList}
             extraData={groceryList}
             renderItem={renderCategory}
