@@ -40,15 +40,13 @@ export const ItemListConteiner = styled.View`
   display: flex;
   flex-direction: row;
   align-items: center;
-  background-color: beige;
 
   /* justify-content: space-between; */
-  padding-left: 10px;
+  padding-left: 5px;
 `;
 
 export const TouchableOpacity = styled.TouchableOpacity`
   display: flex;
-  background-color: salmon;
   flex-direction: row;
   align-items: center;
 `;

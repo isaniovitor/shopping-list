@@ -1,16 +1,19 @@
 import { useNavigation, useRoute } from '@react-navigation/core';
+import { cloneDeep } from 'lodash';
 import React, { useContext, useEffect, useState } from 'react';
 import { KeyboardAvoidingView, Platform } from 'react-native';
 import { FAB } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThemeContext } from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
+import 'react-native-get-random-values';
 
 import Button from '~/components/button';
 import Picker from '~/components/dropDwon';
 import Input from '~/components/input';
 
 import type { AplicationState } from '~/@types/entities/AplicationState';
+import type { CategoryProps } from '~/@types/entities/Category';
 import type { ProductProps } from '~/@types/entities/Product';
 import { ADDCATEGORY_SCREEN, HOME_SCREEN } from '~/constants/routes';
 import { addProductAction } from '~/store/ducks/product/actions';
@@ -27,7 +30,7 @@ const AddProduct: React.FC = () => {
   const [userQuantity, setUserQuantity] = useState('');
   const [userUnity, setUserUnity] = useState('');
   const [userPrice, setUserPrice] = useState('');
-  const [userCategory, setUserCategory] = useState({ id: 0, name: '' });
+  const [userCategory, setUserCategory] = useState({ id: '', name: '' });
   const { groceryList } = useSelector(
     (state: AplicationState) => state.product,
   );
@@ -44,14 +47,13 @@ const AddProduct: React.FC = () => {
   }
 
   function handleAddProduct() {
-    const newList = groceryList;
+    const newList = cloneDeep(groceryList);
     let newItem: ProductProps;
 
     newList.map(item => {
-      // mudei aq
       if (item.id === userCategory.id) {
         newItem = {
-          id: '8',
+          id: uuidv4(),
           name: userName,
           amount: userQuantity,
           price: userPrice,
@@ -69,7 +71,7 @@ const AddProduct: React.FC = () => {
   }
 
   function handleEditProduct() {
-    const newList = groceryList;
+    const newList = cloneDeep(groceryList);
     const EditedItem: ProductProps = {
       id: item.id,
       name: userName,
@@ -82,11 +84,9 @@ const AddProduct: React.FC = () => {
     };
 
     newList.map(category => {
-      // mudei aq
       if (category.id === userCategory.id) {
         category.listItems.map(product => {
-          // uso o nome aq pois o id usando uuid n dá
-          if (product.name === item.name)
+          if (product.id === item.id)
             category.listItems[category.listItems.indexOf(product)] =
               EditedItem;
 
@@ -99,17 +99,13 @@ const AddProduct: React.FC = () => {
     dispatch(addProductAction(newList));
   }
 
-  function handleAddImage() {
-    console.log('adicionou imagem!'); // navigation.setOptions({ title: 'Updated!' })};
-    setUserPhoto('imagem');
-  }
-
   useEffect(() => {
     navigation.setOptions({
       iconType: 'ionicons',
       iconColor: Colors.WHITE,
       title: item ? 'Editar Produto' : 'Adicionar Produto',
     });
+
     if (item) {
       setUserName(item.name);
       setUserQuantity(item.amount);
@@ -127,12 +123,7 @@ const AddProduct: React.FC = () => {
     >
       <Sty.Container>
         <Sty.ImageContainer>
-          <FAB
-            style={Sty.styles.imagefab}
-            color="white"
-            icon="image"
-            onPress={handleAddImage}
-          />
+          <FAB style={Sty.styles.imagefab} color="white" icon="image" />
         </Sty.ImageContainer>
         <Sty.InputContainer>
           <Input
@@ -157,17 +148,10 @@ const AddProduct: React.FC = () => {
               placeholder="Digite a unidade"
               width={44}
               dropwidth={185}
-              // type="dropdwon"
               type="input"
               value={userUnity}
               onChangeText={setUserUnity}
             />
-            {/* <Picker
-              itemSelect={userCategory}
-              setItem={setUserCategory}
-              categories={categoryList}
-              disabled={false}
-            /> */}
           </Sty.RowInputContainer>
 
           <Input
@@ -197,7 +181,7 @@ const AddProduct: React.FC = () => {
           <Button
             color="white"
             label="Salvar"
-            actionBtn={() => (item ? handleEditProduct() : handleAddProduct())} // aq(item ? handleAddProduct : handleEditProduct)
+            actionBtn={() => (item ? handleEditProduct() : handleAddProduct())}
           />
         </Sty.ButtonContainer>
       </Sty.Container>

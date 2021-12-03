@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 import Button from '~/components/button';
 import Input from '~/components/input';
 
-import { HOME_SCREEN } from '~/constants/routes';
 import { loginAction } from '~/store/ducks/user/actions';
 
 import groceries from '../../assets/groceries.png';

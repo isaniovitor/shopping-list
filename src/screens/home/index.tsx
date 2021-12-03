@@ -1,8 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
-import { includes, filter, toUpper } from 'lodash';
-import React, { useContext, useEffect, useState } from 'react';
-import { KeyboardAvoidingView, Platform, FlatList, View } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
+import { KeyboardAvoidingView, Platform, FlatList } from 'react-native';
 import { FAB, Checkbox } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThemeContext } from 'styled-components';
@@ -25,6 +23,7 @@ const Home: React.FC = () => {
   const [search, setSearch] = useState('');
   const [visible, setVisible] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [length, setLength] = useState(0);
   const [list, setList] = useState<GroceryProps[] | []>([]);
   const [allListItems, setAllListItems] = useState<ProductProps[] | []>([]);
   const [itemModal, setItemModal] = useState<ProductProps>();
@@ -48,10 +47,9 @@ const Home: React.FC = () => {
   function pressCheck(item) {
     const newList = groceryList;
     newList.map(categoty => {
-      // usando o nome pq o uuid n deu certo
-      if (categoty.name === item.category.name) {
+      if (categoty.id === item.category.id) {
         categoty.listItems.map(product => {
-          if (product === item) product.isAdded = !product.isAdded;
+          if (product.id === item.id) product.isAdded = !product.isAdded;
           return null;
         });
       }
@@ -91,35 +89,32 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     let som = 0;
+    let len = 0;
+
     allListItems.map((item: ProductProps) => {
-      som += Number(item.price);
+      som += Number(item.price) * Number(item.amount);
+      len += Number(item.amount);
       return null;
     });
     setTotalPrice(som);
+    setLength(len);
   }, [allListItems]);
 
-  useEffect(() => {
-    const newList = groceryList.filter(
-      (currentItem: GroceryProps) => currentItem.listItems.length !== 0,
-    );
-    setList(newList);
-  }, [groceryList]);
+  const updateItemsFilter = useCallback(() => {
+    let itemsFilter: ProductProps[] | [] = [];
+    itemsFilter = allListItems.filter(listItem => {
+      return listItem.name.toUpperCase().includes(search.toUpperCase());
+    });
 
-  const updateItemsFilter = () => {
-    let itemsFilter = [];
-    itemsFilter = filter(allListItems, item =>
-      includes(toUpper(item.name), toUpper(search)),
-    );
     setListItemsFilter(itemsFilter);
-  };
+  }, [allListItems, search]);
 
   useEffect(() => {
     if (search) {
       updateItemsFilter();
+    } else {
+      setListItemsFilter([]);
     }
-    // else {
-    //   setListItemsFilter([]);
-    // }
   }, [search, updateItemsFilter]);
   // end search
 
@@ -145,7 +140,7 @@ const Home: React.FC = () => {
   function renderCategory({ item }: any) {
     if (item.listItems.length !== 0) {
       return (
-        <View>
+        <>
           <Sty.HeaderList>{item.name}</Sty.HeaderList>
           <FlatList
             style={{ paddingTop: 20 }}
@@ -154,7 +149,7 @@ const Home: React.FC = () => {
             renderItem={renderProduct}
             keyExtractor={(itemCategory: any, index: any) => index}
           />
-        </View>
+        </>
       );
     }
     return null;
@@ -203,7 +198,7 @@ const Home: React.FC = () => {
           onPress={handleAddProduct}
         />
 
-        <Resume qtdItems={allListItems.length} totalPrice={totalPrice} />
+        <Resume qtdItems={length} totalPrice={totalPrice} />
       </Sty.Container>
     </KeyboardAvoidingView>
   );

@@ -1,9 +1,11 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { useNavigation } from '@react-navigation/core';
+import { cloneDeep } from 'lodash';
 import React, { useContext, useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThemeContext } from 'styled-components';
+import { v4 as uuidv4 } from 'uuid';
+import 'react-native-get-random-values';
 
 import Button from '~/components/button';
 import Input from '~/components/input';
@@ -30,15 +32,15 @@ const AddCategory: React.FC = () => {
   );
 
   function handleAddCategory() {
-    const newCategoryList = categoryList;
-    const newGroceryList = groceryList;
+    const newCategoryList = cloneDeep(categoryList);
+    const newGroceryList = cloneDeep(groceryList);
     const newCategory: CategoryProps = {
-      id: 6,
+      id: uuidv4(),
       name: userName,
     };
     const newGroceryCategory: GroceryProps = {
-      id: 6,
-      name: userName,
+      id: newCategory.id,
+      name: newCategory.name,
       listItems: [],
     };
 
@@ -50,7 +52,7 @@ const AddCategory: React.FC = () => {
     newGroceryList.push(newGroceryCategory);
     dispatch(addProductAction(newGroceryList));
 
-    navigation.navigate(ADDPRODUCT_SCREEN);
+    navigation.navigate(ADDPRODUCT_SCREEN, { item: null });
   }
 
   useEffect(() => {
