@@ -27,12 +27,11 @@ export const RowInputContainer = styled.View`
 `;
 
 export const AddCategoryContainer = styled.View`
-  width: 100%;
-
+  width: 108%;
+  /* background-color: black; */
   flex: 1;
   align-items: center;
   flex-direction: row;
-
 `;
 
 export const ButtonContainer = styled.View`

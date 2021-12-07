@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
+
 import Icon from '~/components/icon';
 
 // Containers
@@ -58,7 +59,7 @@ export const ItemListConteiner = styled.View`
   align-items: center;
 
   /* justify-content: space-between; */
-  padding-left: 15px;
+  padding-left: 5px;
 `;
 
 export const ImageItem = styled.Image`
@@ -80,6 +81,12 @@ export const NameItem = styled.Text`
 export const PriceItem = styled.Text`
   font-size: 14px;
   color: #8492a6;
+`;
+
+export const TouchableOpacity = styled.TouchableOpacity`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 `;
 
 // FAB

@@ -50,11 +50,17 @@ const Input: React.FC<TextInputProps & InputProps> = ({
             name={iconLeft}
           />
         )}
-        {type && <DropDwon label={title} dropWidth={dropwidth} />}
-        {!type && (
-          <S.Container labelSameLine={labelSameLine}>
+        {type === 'dropdwon' && (
+          <DropDwon label={title} dropWidth={dropwidth} />
+        )}
+        {(type === 'input' || type === 'inputlogin') && (
+          <S.Container labelSameLine={labelSameLine} type={type}>
             {label && <S.Label fontSize={sfs(9)}>{label}</S.Label>}
-            <S.ContainerInput error={error} labelSameLine={labelSameLine}>
+            <S.ContainerInput
+              error={error}
+              labelSameLine={labelSameLine}
+              type={type}
+            >
               <S.Input {...rest} autoCapitalize="none" iconRight={iconRight} />
               {iconRight && (
                 <S.Touchable onPress={() => actionIcon && actionIcon()}>
